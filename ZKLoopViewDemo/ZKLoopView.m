@@ -197,16 +197,16 @@
 // 添加定时器
 - (void)addTimer
 {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(automaticChangeImage) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:3.f target:self selector:@selector(automaticChangeImage) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 
 // 移除定时器
 - (void)removeTimer
 {
-    if (self.timer) {
-        [self.timer invalidate];
-        self.timer = nil;
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
     }
 }
 
@@ -229,7 +229,7 @@
     self.imageView.image = self.images[self.index];
     self.titleLabel.text = self.titles[self.index];
     [self.imageView.layer addAnimation:self.transition forKey:@"transition"];
-    if (!self.timer) {
+    if (!_timer) {
         [self addTimer];
     }
 }
